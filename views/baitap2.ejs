@@ -1,3 +1,33 @@
+<h1>To do list</h1>
+<form id="myForm" action="/bt2" method="POST" onload="setFocus()">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Nhập ghi chú" name="data" id="inputData">
+    </div>
+</form>
+<script>
+    document.getElementById("inputData").addEventListener("keypress", function(event) {
+        if (event.keyCode === 13) { // Kiểm tra nếu phím được nhấn là phím "Enter" (keyCode 13)
+            event.preventDefault(); // Ngăn chặn hành động mặc định của phím "Enter" là xuống dòng
+            document.getElementById("myForm").submit(); // Gọi hàm submit của form
+        }
+    });
+    document.addEventListener("DOMContentLoaded", function() {
+            setFocus();
+    });
+    function setFocus() {
+        document.getElementById("inputData").focus(); // Thiết lập focus vào input có id là "inputData"
+    }
+</script>
 <div>
-    <h1>Bài tập 2</h1>
+    <label>Ghi chú đã lưu: </label>
+    <ul class="list-group">
+       
+        <% for (var i = 0; i < items.length; i++) {%>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <%= items[i] %>
+                <span class="badge badge-danger badge-pill"><a href="/delete?index=<%= i %>" style="color: white; text-decoration: none;">x</a></span>
+            </li>
+        <% } %>
+    </ul>
+    
 </div>
