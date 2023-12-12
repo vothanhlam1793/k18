@@ -1,3 +1,19 @@
-<div>
-    <h1>Bài tập 1</h1>
-</div>
+<h1>Notepad</h1>
+<form action="/bt1" method="POST">
+    <div class="d-flex justify-content-between mb-3">
+        <% if (status == "saved") { %>
+            <div class="p-2 alert alert-success"><p>Đã lưu dữ liệu</p></div>
+        <% } else { %>
+            <div class="p-2"></div>
+        <% }%>
+        <div class="p-2"><a class="btn btn-success" href="/?page=baitap1_read">Xem đã lưu</a></div>
+    </div>
+    <div class="form-group">
+        <label class="text-danger">Nhập dữ liệu mới:</label>
+        <hr>
+        <textarea class="form-control" name="data" rows="5" placeholder="Nhập dữ liệu mới nhé ^^"></textarea>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Lưu lại</button>
+    </div>
+</form>

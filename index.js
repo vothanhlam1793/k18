@@ -18,10 +18,41 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-    res.render("index", {
-        page: req.query.page ? req.query.page : "home" 
-    });
+    if(req.query.page == "baitap1_read"){
+        fs.readFile(__dirname + "/storage/bt1.txt", function(err, data){
+            if(err){
+                res.render("index", {
+                    page: req.query.page,
+                    data: "Tải dữ liệu bị lỗi" + err
+                });
+            } else {
+                res.render("index", {
+                    page: req.query.page,
+                    data: data
+                });
+            }
+        });
+    } else {
+        res.render("index", {
+            page: req.query.page ? req.query.page : "home",
+            status: req.query.status ? req.query.status : "",
+        });
+    }
 })
+
+app.post("/bt1", function(req, res){
+    var str = "";
+    if(req.body.data){
+        str = req.body.data;
+    }
+    fs.writeFile(__dirname + "/storage/bt1.txt", str,function(err){
+        if(err){
+            res.send("ERR");
+        } else {
+            res.redirect("/?page=baitap1&status=saved");
+        }
+    });
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
